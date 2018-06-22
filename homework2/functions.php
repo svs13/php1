@@ -1,6 +1,6 @@
 <?php
 
-function boolToStr($b)  { //Преобразует булевое значение в 'true'/'false'
+function boolToStr($b)  { //Преобразование булевого значения в 'true'/'false'
     if ( $b ) {
         return 'true';
     } else {
@@ -35,5 +35,13 @@ function getGenderByName ($name) { //Возвращает пол человек�
     }
 
 }
+
+assert( 'мужской' == getGenderByName('Владимир') );
+assert( 'мужской' == getGenderByName('Иван') );
+assert( 'мужской' == getGenderByName('Алексей') );
+assert( 'мужской' == getGenderByName('Михаил') );
+assert( 'женский' == getGenderByName('Анна') );
+assert( 'женский' == getGenderByName('Мария') );
+assert( null == getGenderByName('Любовь') );
 
 ?>

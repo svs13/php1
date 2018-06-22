@@ -1,3 +1,9 @@
+<?php
+
+    include __DIR__ . '/functions.php';
+
+?>
+
 <html>
     <head>
         <title>PHP-1. Урок 2</title>
@@ -7,10 +13,6 @@
         <p><b>Домашняя работа</b></p>
 
         <p><b>Пункт 1</b></p>
-
-        <?php
-        include __DIR__ . '/functions.php';
-        ?>
 
         Таблица истинности логического оператора &&
         <table cellspacing="0" border="1">
@@ -49,7 +51,7 @@
             <tr>
                 <td>$a</td>
                 <td>$b</td>
-                <td>$a && $b</td>
+                <td>$a || $b</td>
             </tr>
             <tr>
                 <td>false</td>
@@ -80,7 +82,7 @@
             <tr>
                 <td>$a</td>
                 <td>$b</td>
-                <td>$a && $b</td>
+                <td>$a xor $b</td>
             </tr>
             <tr>
                 <td>false</td>
@@ -115,12 +117,13 @@
         $b = -22;
         $c =-11;
 
-        $d = getD($a,$b,$c);
+        $d = getD($a,$b,$c); //дискриминант
 
         ?>
 
         Квадратное уравнение
         <?php echo $a; ?>&#183;x<sup>2</sup><?php echo addPlus($b) . $b; ?>&#183;x<?php echo addPlus($c) . $c; ?>=0
+
         <?php
 
         if ( $d > 0 ) { //D > 0 Уравнение имеет 2 решения
@@ -130,6 +133,7 @@
             имеет 2 решения:<br>
             x<sub>1</sub> = <?php echo round( $x1, 3 ); ?><br>
             x<sub>2</sub> = <?php echo round( $x2, 3 ); ?><br>
+
         <?php
 
         } else if ( $d == 0 ) { //D == 0 Уравнение имеет 1 решение
@@ -138,6 +142,7 @@
         ?>
          имеет 1 решение:<br>
          x = <?php echo round( $x, 3 ); ?><br>
+
          <?php
 
         } else { //D < 0 Уравнение вещественных корней не имеет
