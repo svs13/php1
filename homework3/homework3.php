@@ -15,6 +15,7 @@
         //var_dump( $_GET['num1'] );
         //var_dump( is_numeric( $_GET['num1'] ) );
 
+<<<<<<< HEAD
         //Данные калькулятора
         $num1 = '';
         $num2 = '';
@@ -92,6 +93,78 @@
             }
         }
 
+=======
+            $num1 = null;
+            $num2 = null;
+            $operation = null;
+            $res = '';
+
+            switch ( false ) { //Второе число
+                case array_key_exists('num2', $_GET):
+                case $_GET['num2'] != '':
+                    $res = 'Ошибка. Пожалуйста, введите второе число!';
+                    break;
+                case is_numeric( $_GET['num2'] ):
+                    $res = 'Ошибка. Во второе поле введено не числовое значение!';
+                default:
+                    $num2 = $_GET['num2'];
+                    break;
+            };
+
+            switch ( false ) { //Операция
+                case array_key_exists('operation', $_GET):
+                    $res = 'Ошибка. Пожалуйста, выберите операцию!';
+                    break;
+                default:
+                    $operation = $_GET['operation'];
+                    break;
+            };
+
+            switch ( false ) { //Первое число
+                case array_key_exists('num1', $_GET):
+                case $_GET['num1'] != '':
+                    $res = 'Ошибка. Пожалуйста, введите первое число!';
+                    break;
+                case is_numeric( $_GET['num1'] ):
+                    $res = 'Ошибка. В первое поле введено не числовое значение!';
+                default:
+                    $num1 = $_GET['num1'];
+                    break;
+            };
+
+            if ( $res === '' ) { //Ошибок не было
+                switch ($operation) { //Вычисление
+                    case '+':
+                        $res = $num1 + $num2;
+                        break;
+                    case '-':
+                        $res = $num1 - $num2;
+                        break;
+                    case '*':
+                        $res = $num1 * $num2;
+                        break;
+                    case '/':
+                        $res = $num1 / $num2;
+                        break;
+                    case '^':
+                        $res = $num1 ** $num2;
+                        break;
+                    default:
+                        $res = 'Ошибка. Неизвестная операция';
+                        break;
+                }
+            }
+
+
+
+            function radio_cheked( $oper, $now_oper ) { //Отмечает операцию в form
+                if ($oper == $now_oper) {
+                    return 'checked';
+                } else {
+                    return '';
+                }
+            }
+>>>>>>> b4feba0e7067df3a3ed2a69955187f4d24f02bda
         ?>
 
 
