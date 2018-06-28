@@ -11,14 +11,4 @@ function getArrImg() { //Получение массива картинок, к 
     return $arr_img;
 }
 
-function getImgNameById($arr_img, $id) { //Получение имени файла картинки по id
-
-    if ( isset( $arr_img[$id] ) ) {
-        return $arr_img[ $id ];
-    } else {
-        return false;
-    }
-
-}
-
 ?>
