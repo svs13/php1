@@ -12,16 +12,14 @@ include __DIR__ . '/functions.php';
 
         <?php
 
+        $arr_img =  getArrImg();
 
-        if ( array_key_exists('id', $_GET) &&
-                ( $img_url = getImgUrlById( getArrImg(), $_GET['id'] ) ) !== false ) {
-            //учитываем приоритет операторов http://php.net/manual/ru/language.operators.precedence.php
-            //$img_url = getImgUrlById( getArrImg(), $_GET['id'] );
-            //$img_url значение уже присвоено чуть выше
+        if ( isset( $_GET['id'] ) && isset( $arr_img[ $_GET['id'] ] ) ) {
+            $img_name = $arr_img[ $_GET['id'] ];
 
         ?>
 
-            <a href="homework3.php"><img src="<?php echo $img_url; ?>" width="100%"></a>
+            <a href="/homework3/homework3.php"><img src="/homework3/images/<?php echo $img_name; ?>" width="100%"></a>
 
         <?php
 
@@ -31,7 +29,7 @@ include __DIR__ . '/functions.php';
 
         Ошибка. Запрашиваемое изображение не существует.
         <br>
-        <a href="homework3.php">Вернуться на главную страницу</a>
+        <a href="/homework3/homework3.php">Вернуться на главную страницу</a>
 
         <?php
 

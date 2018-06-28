@@ -207,6 +207,23 @@
         <h4>Параметр id их GET запроса клиента</h4>
         is_null( $_GET['id'] ) вызывает ошибку, т.к. нет такого элемента.
         <br>
+        isset( $_GET['id'] ) - для проверки наличия индекса и значения не равного null
+        <br>
+        <b>НО ЗАПОМНИТЬ</b>, $s = 'onetwothree'; isset( $s['1'] ) - вернёт true. а array_key_exists('1', $s) - false
+        <br>
+        Результат:
+        <br>
+        <?php
+        $s = 'onetwothree';
+        if ( isset( $s['1'] ) ) {
+            echo 'isset( $s[\'1\'] ) - true';
+        }
+        if ( array_key_exists('1', $s) ) {
+            echo 'array_key_exists(\'1\', $s) - false';
+        }
+
+        ?>
+        <br>
         array_key_exists() готовая функция есть! для проверки наличия ИНДЕКСА элемента в массиве
         (внутренние индексы многомерных массивов не ищет)
         <br><br>

@@ -33,6 +33,7 @@
                      break;
                  case is_numeric($_GET['num2']):
                      $res = 'Ошибка. Во второе поле введено не числовое значение!';
+                     //break; - введённое значение должно отображезиться в форме клиента
                  default:
                      $num2 = $_GET['num2'];
                      break;
@@ -54,6 +55,7 @@
                      break;
                  case is_numeric($_GET['num1']):
                      $res = 'Ошибка. В первое поле введено не числовое значение!';
+                     //break; - введённое значение должно отображезиться в форме клиента
                  default:
                      $num1 = $_GET['num1'];
                      break;
@@ -124,18 +126,26 @@
         //получение массива данных картинок
         $arr_img = getArrImg();
 
-        //создание нового многомерного массива с элементами [ id, url ]
+        //создание нового многомерного массива с элементами [ id, name ]
         foreach ($arr_img as $index => $value) {
-            $arr_pic[] = ['id'=>$index, 'url'=>$value];
+            $arr_pic[] = ['id'=>$index, 'name'=>$value];
         }
 
         ?>
 
 
-        <a href="image.php?id=<?php echo $arr_pic[0]['id']; ?>"><img src="<?php echo $arr_pic[0]['url']; ?>" width="20%"></a>
-        <a href="image.php?id=<?php echo $arr_pic[1]['id']; ?>"><img src="<?php echo $arr_pic[1]['url']; ?>" width="20%"></a>
-        <a href="image.php?id=<?php echo $arr_pic[2]['id']; ?>"><img src="<?php echo $arr_pic[2]['url']; ?>" width="20%"></a>
-        <a href="image.php?id=<?php echo $arr_pic[3]['id']; ?>"><img src="<?php echo $arr_pic[3]['url']; ?>" width="20%"></a>
+        <a href="/homework3/image.php?id=<?php echo $arr_pic[0]['id']; ?>">
+            <img src="/homework3/images/<?php echo $arr_pic[0]['name']; ?>" width="20%">
+        </a>
+        <a href="/homework3/image.php?id=<?php echo $arr_pic[1]['id']; ?>">
+            <img src="/homework3/images/<?php echo $arr_pic[1]['name']; ?>" width="20%">
+        </a>
+        <a href="/homework3/image.php?id=<?php echo $arr_pic[2]['id']; ?>">
+            <img src="/homework3/images/<?php echo $arr_pic[2]['name']; ?>" width="20%">
+        </a>
+        <a href="/homework3/image.php?id=<?php echo $arr_pic[3]['id']; ?>">
+            <img src="/homework3/images/<?php echo $arr_pic[3]['name']; ?>" width="20%">
+        </a>
 
     </body>
 </html>
