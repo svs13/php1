@@ -16,7 +16,8 @@
         </p>
         <p>Урок 3.
             <a href="/homework3/repeat.php" target="_blank">Повтор урока.</a>
-            <a href="/homework3/homework3.php" target="_blank">Код.</a>
+            <a href="/homework3/calculator.php" target="_blank">Калькулятор</a>
+            <a href="/homework3/gallery.php" target="_blank">Галерея</a>
             <a href="/homework3/homework3.txt" target="_blank">Ответы и пояснения.</a>
         </p>
 

@@ -1,35 +1,28 @@
 <?php
 
 function calculator($n1, $op, $n2) { //Калькулятор. Вывод выражения и его результата
-    switch ($operation) {
+    switch ($op) {
         case '+':
-            $res = ($n1 . $op . $n2 . '=') . ( $n1 + $n2 );
+            $res = $n1 + $n2;
             break;
         case '-':
-            $res = ($n1 . $op . $n2 . '=') . ( $n1 - $n2 );
+            $res = $n1 - $n2;
             break;
         case '*':
-            $res = ($n1 . $op . $n2 . '=') . ( $n1 * $n2 );
+            $res = $n1 * $n2;
             break;
         case '/':
-            $res = ($n1 . $op . $n2 . '=') . ( $n1 / $n2 );
+            $res = $n1 / $n2;
             break;
         case '^':
-            $res = ($n1 . $op . $n2 . '=') . ( $n1 ** $n2 );
+            $res = $n1 ** $n2;
             break;
         default:
-            $res = '0';
+            $res = 0;
             break;
     }
+//    return $n1 . $op . $n2 . '=' . $res;
     return $res;
-}
-
-function inputCheked( $op1, $op2 ) { //Калькулятор. Отмечает выбранную операцию в input
-    if ($op1 == $op2) {
-        return 'checked';
-    } else {
-        return '';
-    }
 }
 
 function getImages() { //Получение массива картинок

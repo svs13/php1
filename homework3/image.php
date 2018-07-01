@@ -16,7 +16,7 @@ include __DIR__ . '/functions.php';
         if ( isset( $_GET['id'], $images[ $_GET['id'] ] ) ) {
         ?>
 
-            <a href="/homework3/homework3.php"><img src="/homework3/images/<?php echo $images[ $_GET['id'] ]; ?>" width="100%"></a>
+            <img src="/homework3/images/<?php echo $images[ $_GET['id'] ]; ?>" width="100%">
 
         <?php
         }
