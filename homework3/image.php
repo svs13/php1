@@ -11,30 +11,16 @@ include __DIR__ . '/functions.php';
     <body>
 
         <?php
+        $arr_img =  getArrImg(); //массив данных картинок
 
-        $arr_img =  getArrImg();
-
-        if ( isset( $_GET['id'] ) && isset( $arr_img[ $_GET['id'] ] ) ) {
-            $img_name = $arr_img[ $_GET['id'] ];
-
+        if ( isset( $_GET['id'], $arr_img[ $_GET['id'] ] ) ) {
         ?>
 
-            <a href="/homework3/homework3.php"><img src="/homework3/images/<?php echo $img_name; ?>" width="100%"></a>
+            <a href="/homework3/homework3.php"><img src="/homework3/images/<?php echo $arr_img[ $_GET['id'] ]; ?>" width="100%"></a>
 
         <?php
-
-        } else {
-
-        ?>
-
-        Ошибка. Запрашиваемое изображение не существует.
-        <br>
-        <a href="/homework3/homework3.php">Вернуться на главную страницу</a>
-
-        <?php
-
         }
-
         ?>
+
     </body>
 </html>
