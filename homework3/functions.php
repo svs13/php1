@@ -1,45 +1,45 @@
 <?php
 
-function calculator($number1, $operation, $number2) { //Калькулятор. Вывод выражения и его результата
+function calculator($n1, $op, $n2) { //Калькулятор. Вывод выражения и его результата
     switch ($operation) {
         case '+':
-            $res = ($number1 . $operation . $number2 . '=') . ( $number1 + $number2 );
+            $res = ($n1 . $op . $n2 . '=') . ( $n1 + $n2 );
             break;
         case '-':
-            $res = ($number1 . $operation . $number2 . '=') . ( $number1 - $number2 );
+            $res = ($n1 . $op . $n2 . '=') . ( $n1 - $n2 );
             break;
         case '*':
-            $res = ($number1 . $operation . $number2 . '=') . ( $number1 * $number2 );
+            $res = ($n1 . $op . $n2 . '=') . ( $n1 * $n2 );
             break;
         case '/':
-            $res = ($number1 . $operation . $number2 . '=') . ( $number1 / $number2 );
+            $res = ($n1 . $op . $n2 . '=') . ( $n1 / $n2 );
             break;
         case '^':
-            $res = ($number1 . $operation . $number2 . '=') . ( $number1 ** $number2 );
+            $res = ($n1 . $op . $n2 . '=') . ( $n1 ** $n2 );
             break;
         default:
-            $res = '';
+            $res = '0';
             break;
     }
     return $res;
 }
 
-function input_cheked( $input_value, $operation ) { //Калькулятор. Отмечает выбранную операцию
-    if ($input_value == $operation) {
+function inputCheked( $op1, $op2 ) { //Калькулятор. Отмечает выбранную операцию в input
+    if ($op1 == $op2) {
         return 'checked';
     } else {
         return '';
     }
 }
 
-function getArrImg() { //Получение массива картинок
-    $arr_img = [
+function getImages() { //Получение массива картинок
+    $images = [
         11=>'1.jpg',
         22=>'2.jpg',
         33=>'3.jpg',
         44=>'4.jpg'
     ];
-    return $arr_img;
+    return $images;
 }
 
 ?>
