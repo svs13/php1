@@ -27,6 +27,11 @@
             <a href="/homework4/uploadImage.php" target="_blank">Загрузка изображения.</a>
             <a href="/homework4/homework4.txt" target="_blank">Ответы и пояснения.</a>
         </p>
+        <p>Урок 5.
+            <a href="/homework5/repeat/repeat.php" target="_blank">Повтор урока.</a>
+            <a href="/homework5/index.php" target="_blank">Главная страница.</a>
+            <a href="/homework5/homework5.txt" target="_blank">Ответы и пояснения.</a>
+        </p>
 
     </body>
 </html>

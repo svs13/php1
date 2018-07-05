@@ -1,0 +1,3 @@
+2018-07-05 22:21:21 UploadImage.php | UploadImage | UserName=Петя | ImageName=test1.png
+2018-07-05 22:39:09 UploadImage.php | UploadImage | UserName=Маша | ImageName=3.jpg
+2018-07-05 23:24:40 UploadImage.php | UploadImage | UserName=Маша | ImageName=test1.png
