@@ -68,7 +68,7 @@ const FN_LOG = __DIR__ . '/log.txt';
 
 function putLog($log) {
 
-    $log = date("Y-m-d H:i:s") . ' ' . $log . "\n";
+    $log = date('Y-m-d H:i:s') . ' ' . $log . "\n";
 
     file_put_contents( FN_LOG, $log, FILE_APPEND );
 
