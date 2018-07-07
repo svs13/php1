@@ -22,6 +22,7 @@
         </p>
         <p>Урок 4.
             <a href="/homework4/repeat/repeat.php" target="_blank">Повтор урока.</a>
+            <a href="/homework4/index.php" target="_blank">Главная страница.</a>
             <a href="/homework4/guestbook.php" target="_blank">Гостевая книга.</a>
             <a href="/homework4/gallery.php" target="_blank">Простейшая галерея.</a>
             <a href="/homework4/uploadImage.php" target="_blank">Загрузка изображения.</a>
