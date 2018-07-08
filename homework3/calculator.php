@@ -38,9 +38,17 @@ include __DIR__ . '/functions.php';
             <select name="op">
                 <?php
                 foreach ($operations as $value) {
-                ?>
-                <option value="<?php echo $value; ?>"> <?php echo $value; ?> </option>
-                <?php
+
+                    if ( $value === $op ) {
+                        $s = 'selected';
+                    } else {
+                        $s = '';
+                    }
+                    ?>
+
+                    <option <?php echo $s; ?> value="<?php echo $value; ?>"> <?php echo $value; ?> </option>
+
+                    <?php
                 }
                 ?>
             </select>
