@@ -23,8 +23,8 @@ if ( null === $us ) {
 
         Здравствуйте, <?php echo $name; ?>! Мы рады видеть Вас на нашем ресурсе!<br>
 
-        <a href="gallery/index.php"> Галерея изображений </a><br>
-        <a href="gallery/uploadImage.php"> Загрузка изображения в галерею </a><br>
+        <a href="/homework5/gallery/index.php"> Галерея изображений </a><br>
+        <a href="/homework5/gallery/uploadImage.php"> Загрузка изображения в галерею </a><br>
 
         <br>
 
