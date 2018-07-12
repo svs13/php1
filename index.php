@@ -44,5 +44,11 @@
             <a href="/homework6/homework6.txt" target="_blank">Ответы и пояснения.</a>
         </p>
 
+        <p>Урок 7. Объектно-ориентированный подход.<br>
+            <a href="/homework7/repeat/repeat.php" target="_blank">Повтор урока.</a>
+            <a href="/homework7/index.php" target="_blank">Главная страница.</a>
+            <a href="/homework7/homework7.txt" target="_blank">Ответы и пояснения.</a>
+        </p>
+
     </body>
 </html>
