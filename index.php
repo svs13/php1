@@ -50,5 +50,11 @@
             <a href="/homework7/homework7.txt" target="_blank">Ответы и пояснения.</a>
         </p>
 
+        <p>Урок 8. Работа с базой данных.<br>
+            <a href="/homework8/repeat/repeat.php" target="_blank">Повтор урока.</a>
+            <a href="/homework8/index.php" target="_blank">Главная страница.</a>
+            <a href="/homework8/homework8.txt" target="_blank">Ответы и пояснения.</a>
+        </p>
+
     </body>
 </html>
