@@ -54,8 +54,9 @@ assert( false === checkPassword('','') ); //false
 function getCurrentUser() { //возвращает имя пользователя
     if ( PHP_SESSION_ACTIVE === session_status() ) { // если механизм сессий вкл и сессия создана
         if ( isset( $_SESSION['username'] ) ) { // и если существует индекс username в массиве сессии
-
-            return $_SESSION['username'];
+            if ( existsUser( $_SESSION['username'] ) ) {
+                return $_SESSION['username'];
+            }
         }
     }
 }
