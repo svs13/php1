@@ -82,9 +82,22 @@ class News
 
     public function getArticleById(string $id)
     {
-        if ( isset( $this->getArticles()[$id] ) ) {
-            return $this->getArticles()[$id];
+
+        $sql = 'SELECT * FROM news WHERE id=:id LIMIT 1';
+        $d = $this->dataBase->query( $sql, [ ':id'=>$id ] );
+
+        if ( is_array($d) ) { //записи есть. Проверяем элементы массива
+            if ( isset($d[0]) ) {
+                $ar = $d[0];
+                if ( isset( $ar['id'], $ar['header'], $ar['text'], $ar['author'] ) ) {
+                    if ( $ar['id'] == $id ) {// кастинг при сравнении
+
+                        return new Article($ar['header'], $ar['text'], $ar['author']);
+                    }
+                }
+            }
         }
+
 
         return NULL;
     }
