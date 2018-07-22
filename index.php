@@ -56,5 +56,12 @@
             <a href="/homework8/homework8.txt" target="_blank">Ответы и пояснения.</a>
         </p>
 
+        <p>Урок 9. Архитектура проекта.<br>
+            <a href="/homework9/repeat/index.php" target="_blank">Повтор урока.</a>
+            <a href="/homework9/index.php" target="_blank">Главная страница.</a>
+            <a href="/homework9/adminPanel.php" target="_blank">Админ-панель.</a>
+            <a href="/homework9/homework9.txt" target="_blank">Ответы и пояснения.</a>
+        </p>
+
     </body>
 </html>
