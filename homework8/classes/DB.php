@@ -5,15 +5,14 @@ class DB
 
     protected $dbh;
 
-    public function __construct(string $path)
+    public function __construct()
     {
+        $params = require __DIR__ . '/../configs/configDBHomework8.php';
 
-        $c = require $path;
+        if ( is_array($params) ) {
+            if ( isset( $params['dsn'], $params['username'], $params['password'] ) ) {
 
-        if ( is_array($c) ) {
-            if ( isset( $c['dsn'], $c['username'], $c['password'] ) ) {
-
-                $this->dbh = new PDO( $c['dsn'], $c['username'], $c['password']);
+                $this->dbh = new PDO( $params['dsn'], $params['username'], $params['password']);
 
             }
         }
@@ -36,7 +35,7 @@ class DB
         return $sth->execute(); //при успехе - true, неудаче - false
     }
 
-    public function query(string $sql, array $data)
+    public function query(string $sql, array $data = [])
     {
         $sth = $this->dbh->prepare( $sql ); //при неудаче возвращает либо false либо исключение
 

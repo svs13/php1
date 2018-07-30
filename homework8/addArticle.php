@@ -3,8 +3,6 @@
 require __DIR__ . '/classes/News.php';
 require __DIR__ . '/classes/View.php';
 
-const DB_NEWS_FN =  __DIR__ . '/configs/configDBHomework8.php';
-
 if ( isset( $_POST['header'] ) ) {
     $header = $_POST['header'];
 } else {
@@ -23,23 +21,26 @@ if ( isset( $_POST['author'] ) ) {
     $author = '';
 }
 
-if ( 0 === strlen( $header . $text . $author ) ) {
-    $add = NULL;
-} else {
-    $add = ( new News( DB_NEWS_FN ) )->addArticle( new Article( $header, $text, $author ) );
+$added = false;
+
+if ( 0 !== strlen( $header . $text . $author ) ) {
+
+    $news = new News();
+    $added = $news->addArticle( new Article( $header, $text, $author ) );
+
+    if ( $added ) {
+        $header = '';
+        $text = '';
+        $author = '';
+    }
+
 }
 
-if ( true === $add ) {
-    $header = '';
-    $text = '';
-    $author = '';
-}
+$view = new View();
 
-$v = new View();
+$view->assign('header', $header);
+$view->assign('text', $text);
+$view->assign('author', $author);
+$view->assign('articleAdded', $added);
 
-$v->assign('header', $header);
-$v->assign('text', $text);
-$v->assign('author', $author);
-$v->assign('articleAdded', $add);
-
-$v->display( __DIR__ . '/templates/addArticle.php');
+$view->display( __DIR__ . '/templates/addArticle.php');

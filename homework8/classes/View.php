@@ -32,23 +32,15 @@ class View
             ob_start();
 
             $this->display($template);
-            $c = ob_get_contents();
+            $content = ob_get_contents();
 
             ob_end_clean();
 
-            return $c;
+            return $content;
         }
 
         return '';
     }
 
-    public function get(string $name)
-    {
-        if ( isset( $this->data[$name] ) ) {
-
-            return $this->data[$name];
-        }
-
-    }
 
 }
