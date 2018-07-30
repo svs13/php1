@@ -11,15 +11,15 @@
 
     <?php
 
-    foreach ( $articles as $id => $ar ) {
+    foreach ($articles as $id => $article ) {
         ?>
 
         <a href="/homework7/article.php?id=<?php echo $id; ?>">
             <header>
-                <h3><?php echo $ar->getHeader(); ?></h3>
+                <h3><?php echo $article->getHeader(); ?></h3>
             </header>
         </a>
-        <article><?php echo $ar->getShotContent(); ?></article>
+        <article><?php echo $article->getShotContent(); ?></article>
 
         <?php
     }

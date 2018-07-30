@@ -6,7 +6,6 @@ function getImages() { //возвращает список изображени�
     $images = array_diff( $images, ['.', '..'] );
 
     return $images;
-
 }
 
 assert( true === is_array( getImages() ) ); //ф-я должна возвратить массив

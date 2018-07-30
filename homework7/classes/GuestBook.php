@@ -7,7 +7,11 @@ class GuestBook extends TextFile
 
     public function append($text)
     {
-        $this->data[] = $text;
+        if ( '' !== $text ) {
+
+            $this->data[] = $text;
+
+        }
 
         return $this;
     }

@@ -6,19 +6,21 @@ require __DIR__ . '/functions.php';
 
 session_start();
 
-$v = new View;
-$v->assign('username', getCurrentUser() );
+$username = getCurrentUser();
 
-if ( null === $v->get('username') ) {
+$view = new View;
 
-    $v->assign('username', 'Гость');
-    $v->assign('auth', false);
+if ( null === $username ) {
+
+    $view->assign('username', 'Гость');
+    $view->assign('auth', false);
 
 } else {
 
-    $v->assign('auth', true);
+    $view->assign('username', $username);
+    $view->assign('auth', true);
 
 }
 
-$v->display(__DIR__ . '/templates/index.php');
+$view->display(__DIR__ . '/templates/index.php');
 

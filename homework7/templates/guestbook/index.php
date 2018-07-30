@@ -8,7 +8,7 @@
 
         <?php
 
-        foreach ( $guestbookData as $record) {
+        foreach ( $records as $record) {
             ?>
             <article><?php echo $record; ?></article>
             <hr>

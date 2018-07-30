@@ -12,4 +12,3 @@ if ( null !== getCurrentUser() ) { //пользователь авторизов
 
 header('Location: /homework7/login.php');
 
-?>

@@ -14,21 +14,15 @@
         </form>
 
 
-        <?php
-        if ( '' !== $filename ) {
-            ?>
+        <?php if ( '' !== $fileName ) { ?>
 
-            <p>Файл '<?php echo $filename; ?>' добавлен</p>
+            <p>Файл '<?php echo $fileName; ?>' добавлен</p>
 
-            <?php
-        } else {
-            ?>
+        <?php } else { ?>
 
             <p>Файл не добавлен</p>
 
-            <?php
-        }
-        ?>
+        <?php } ?>
 
         <br>
 

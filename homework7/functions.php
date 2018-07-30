@@ -15,10 +15,11 @@ assert( true === is_array( getUsersList() ) ); //результат должен
 
 function existsUser($login) { //Проверяет существование логина в массиве пользователей
     if ( in_array( $login, array_column( getUsersList(),'login' ) ) ) {
+
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 assert( true === is_bool( existsUser('1') ) ); //результат должен быть типа boolean
@@ -28,15 +29,13 @@ function checkPassword($login, $password) { //аунтентификация
     if ( existsUser($login) ) { //если пользователь существует
 
         $ul = getUsersList();
+
         foreach ($ul as $user) { //перебираю пользователей
 
             if ( $login == $user['login'] ) { //если логин найден
-                if ( password_verify($password, $user['password']) ) { //и если проверка хэша пароля удачна
 
-                    return true;
-                }
+                return password_verify($password, $user['password']);
             }
-
         }
     }
 
@@ -51,22 +50,24 @@ function getCurrentUser() { //возвращает имя пользовател
     if ( PHP_SESSION_ACTIVE === session_status() ) { // если механизм сессий вкл и сессия создана
         if ( isset( $_SESSION['username'] ) ) { // и если существует индекс username в массиве сессии
             if ( existsUser( $_SESSION['username'] ) ) {
+
                 return $_SESSION['username'];
             }
         }
     }
+
 }
 
 assert( null === getCurrentUser() ); //результат должен быть null (т.к. не запущенна сессия)
 
 
-const FN_LOG = __DIR__ . '/log.txt';
+const FILENAME_LOG = __DIR__ . '/log.txt';
 
 function putLog($log) {
 
     $log = date('Y-m-d H:i:s') . ' ' . $log . "\n";
 
-    file_put_contents( FN_LOG, $log, FILE_APPEND );
+    file_put_contents( FILENAME_LOG, $log, FILE_APPEND );
 
 }
 

@@ -3,7 +3,7 @@
 class TextFile
 {
     protected $path;
-    protected $data;
+    protected $data = [];
 
 
     public function __construct($path)
@@ -11,10 +11,11 @@ class TextFile
         $this->path = $path;
 
         if ( is_readable($this->path) ) {
+
             $this->data = file( $this->path, FILE_IGNORE_NEW_LINES );
-        } else {
-            $this->data = [];
+
         }
+
     }
 
 

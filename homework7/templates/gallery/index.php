@@ -1,18 +1,14 @@
 <html>
-<head>
-    <title>Простейшая фотогалерея</title>
-</head>
+    <head>
+        <title>Простейшая фотогалерея</title>
+    </head>
     <body>
 
-    <?php
-    foreach ($images as $n) {
-        ?>
+        <?php foreach ($images as $filename) { ?>
 
-        <img src="/homework7/gallery/images/<?php echo $n; ?>" width="33%">
+            <img src="/homework7/gallery/images/<?php echo $filename; ?>" width="33%">
 
-        <?php
-    }
-    ?>
+        <?php } ?>
 
     </body>
 </html>

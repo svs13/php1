@@ -2,21 +2,21 @@
 
 class Uploader
 {
-    protected $fn;
+    protected $fieldName;
 
 
-    public function __construct($fieldname)
+    public function __construct($fieldName)
     {
-        $this->fn = $fieldname;
+        $this->fieldName = $fieldName;
     }
 
 
     public function isUploaded() //проверка наличия файла в загрузке (во временном месте)
     {
-        if ( isset( $_FILES[ $this->fn ] ) ) { //если элемент есть
-            if ( UPLOAD_ERR_OK == $_FILES[ $this->fn ]['error'] ) { //и если нет ошибок, т.е. файл загружен и имя файла есть.
-                if ( file_exists( $_FILES[ $this->fn ]['tmp_name'] ) ) { // и если файл ещё не перемещён
-                    if ( is_uploaded_file( $_FILES[ $this->fn ]['tmp_name'] ) ) { //и если файл загружен действительно через HTTP POST
+        if ( isset( $_FILES[ $this->fieldName ] ) ) { //если элемент есть
+            if ( UPLOAD_ERR_OK == $_FILES[ $this->fieldName ]['error'] ) { //и если нет ошибок, т.е. файл загружен и имя файла есть.
+                if ( file_exists( $_FILES[ $this->fieldName ]['tmp_name'] ) ) { // и если файл ещё не перемещён
+                    if ( is_uploaded_file( $_FILES[ $this->fieldName ]['tmp_name'] ) ) { //и если файл загружен действительно через HTTP POST
 
                         return true;
                     }
@@ -34,7 +34,7 @@ class Uploader
             if ( '' !== pathinfo($path , PATHINFO_BASENAME) ) { //если имя указано
                 if ( '' !== pathinfo($path , PATHINFO_DIRNAME) ) { //если путь директории указан
                     if ( !file_exists($path) ) { //если файла по указанному пути НЕТ
-                        if ( move_uploaded_file( $_FILES[ $this->fn ]['tmp_name'], $path ) ) { //если перемещение успешно
+                        if ( move_uploaded_file( $_FILES[ $this->fieldName ]['tmp_name'], $path ) ) { //если перемещение успешно
 
                             return true;
                         }
@@ -50,7 +50,8 @@ class Uploader
     public function getMimeType() //MIME тип содержимого файла
     {
         if ( $this->isUploaded() ) {
-            $res = mime_content_type($_FILES[ $this->fn ]['tmp_name']);
+
+            $res = mime_content_type($_FILES[ $this->fieldName ]['tmp_name']);
 
             if ( false !== $res ) { // если ошибок при чтении/определении типа файла по содержимому не было
 
@@ -58,7 +59,6 @@ class Uploader
             }
         }
 
-        return null;
     }
 
 
@@ -66,7 +66,7 @@ class Uploader
     {
         if ( $this->isUploaded() ) {
 
-            return pathinfo($_FILES[ $this->fn ]['name'] , PATHINFO_BASENAME);
+            return pathinfo($_FILES[ $this->fieldName ]['name'] , PATHINFO_BASENAME);
         }
 
         return '';

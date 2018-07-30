@@ -21,7 +21,7 @@ class File
 
         } else {
 
-            $this->data = NULL;
+            $this->data = null;
 
         }
     }
@@ -34,11 +34,6 @@ class File
     public function setData($data)
     {
         $this->data = $data;
-    }
-
-    public function append($text)
-    {
-        $this->data .= $text;
     }
 
     public function save()

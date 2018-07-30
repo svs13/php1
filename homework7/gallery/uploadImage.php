@@ -10,42 +10,38 @@ const UPLOAD_DIR = __DIR__ . '/images'; //путь директории
 
 session_start();
 
+$username = getCurrentUser();
 
-$v = new View;
-
-$v->assign('username', getCurrentUser() );
-
-if ( null === $v->get('username') ) { //Клиент не авторизован
+if ( null === $username ) { //Клиент не авторизован
 
     header('Location: /homework7/login.php');
 
     exit;
-
 }
 
 //Клиент авторизован
 
 
-$up = new Uploader('image');
+$uploader = new Uploader('image');
 
-if ( in_array( $up->getMimeType(), UPLOAD_TYPES ) ) { //если загруженный файл удовлетворяет списку разрешенных типов
+if ( in_array( $uploader->getMimeType(), UPLOAD_TYPES ) ) { //если загруженный файл удовлетворяет списку разрешенных типов
 
-    $fn = $up->getFileName();
+    $fileName = $uploader->getFileName();
 
-    if ( '' !== $fn ) { // если имя файла задано
+    if ( '' !== $fileName ) { // если имя файла задано
 
-        $fp = UPLOAD_DIR . '/' . $fn;
+        $filePath = UPLOAD_DIR . '/' . $fileName;
 
-        if ( file_exists($fp) ) { // если файл по данному пути уже существует
+        if ( file_exists($filePath) ) { // если файл по данному пути уже существует
 
-            $fn = date('ymdHis') . '-' . $fn;
-            $fp = UPLOAD_DIR . '/' . $fn;
+            $fileName = date('ymdHis') . '-' . $fileName;
+            $filePath = UPLOAD_DIR . '/' . $fileName;
 
         }
 
-        if ( !$up->upload($fp) ) { // если перенести файл не удалось
+        if ( !$uploader->upload($filePath) ) { // если перенести файл не удалось
 
-            $fn = '';
+            $fileName = '';
 
         }
 
@@ -53,25 +49,25 @@ if ( in_array( $up->getMimeType(), UPLOAD_TYPES ) ) { //если загруже�
 
 }
 
-if ( !isset($fn) ) {
+if ( !isset($fileName) ) {
 
-    $fn = '';
+    $fileName = '';
 
 }
 
-if ( '' !== $fn ) { //если картинка успешно загружена - оставляем лог
+if ( '' !== $fileName ) { //если картинка успешно загружена - оставляем лог
 
     $log[] = 'uploadImage.php';
     $log[] = 'uploadImage';
-    $log[] = 'UserName=' . $v->get('username');
-    $log[] = 'ImageName=' . $fn;
+    $log[] = 'UserName=' . $username;
+    $log[] = 'ImageName=' . $fileName;
 
     putLog( implode( ' | ', $log) );
 
 }
 
-
-$v->assign('filename', $fn);
-
-$v->display(__DIR__ . '/../templates/gallery/uploadImage.php');
+$view = new View;
+$view->assign('username', $username);
+$view->assign('fileName', $fileName);
+$view->display(__DIR__ . '/../templates/gallery/uploadImage.php');
 

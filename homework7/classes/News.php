@@ -41,4 +41,13 @@ class News extends File
         return $this->articles;
     }
 
+    public function getArticleById(string $id)
+    {
+        if ( isset( $this->articles[$id] ) ) {
+
+            return $this->articles[$id];
+        }
+
+    }
+
 }
