@@ -4,21 +4,19 @@ require __DIR__ . '/autoload.php';
 
 if ( isset( $_GET['id'] ) ) {
 
-    $gal = new \App\Models\Gallery( __DIR__ . '/images/' );
-    $im = $gal->getImageById( $_GET['id'] );
+    $gallery = new \App\Models\Gallery();
+    $image = $gallery->getImageById( $_GET['id'] );
 
 }
 
-if ( !isset($im) ) {
+if ( !isset($image) ) {
 
     header('Location: /homework9/gallery.php');
 
     exit;
 }
 
-$v = new \App\Models\View();
-
-$v->assign('image', $im->getName() );
-
-$v->display( __DIR__ . '/templates/image.php' );
+$view = new \App\Models\View();
+$view->assign('image', $image->getName() );
+$view->display( __DIR__ . '/templates/image.php' );
 

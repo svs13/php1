@@ -2,10 +2,8 @@
 
 require __DIR__ . '/autoload.php';
 
-$tt = new \App\Models\TrainTable();
+$trainTable = new \App\Models\TrainTable();
 
-$v = new \App\Models\View();
-
-$v->assign('trains', $tt->getTrains() );
-
-$v->display( __DIR__ . '/templates/trains.php' );
+$view = new \App\Models\View();
+$view->assign('trains', $trainTable->getTrains() );
+$view->display( __DIR__ . '/templates/trains.php' );

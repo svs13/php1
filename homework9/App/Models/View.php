@@ -22,6 +22,7 @@ class View
             foreach ($this->data as $name => $value) {
 
                 $$name = $value;
+
             }
 
             include $template;
@@ -37,11 +38,11 @@ class View
             ob_start();
 
             $this->display($template);
-            $c = ob_get_contents();
+            $content = ob_get_contents();
 
             ob_end_clean();
 
-            return $c;
+            return $content;
         }
 
         return '';

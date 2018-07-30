@@ -9,23 +9,9 @@ class DB
 
     public function __construct()
     {
-
         $path = realpath( __DIR__ . '/../../configs/configDB.php');
-
         $cfg = require $path;
-
-        if ( is_array($cfg) ) {
-            if ( isset( $cfg['dsn'], $cfg['username'], $cfg['password'] ) ) {
-
-                $this->dbh = new \PDO( $cfg['dsn'], $cfg['username'], $cfg['password']);
-            }
-        }
-
-        if ( !isset( $this->dbh ) ) {
-            //исключение.
-            die('FatalError');
-        }
-
+        $this->dbh = new \PDO( $cfg['dsn'], $cfg['username'], $cfg['password']); //код "свой". Доп. проверки излишни
     }
 
     public function execute(string $sql)
@@ -40,7 +26,7 @@ class DB
         return $sth->execute(); //при успехе - true, неудаче - false
     }
 
-    public function query(string $sql, array $data)
+    public function query(string $sql, array $data = [])
     {
         $sth = $this->dbh->prepare( $sql ); //при неудаче возвращает либо false либо исключение
 

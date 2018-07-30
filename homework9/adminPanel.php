@@ -6,7 +6,9 @@ require __DIR__ . '/functions.php';
 
 $auth = new \App\Models\Authorization();
 
-if ( null === $auth->getUsername() ) {
+$username = $auth->getUsername();
+
+if ( null === $username ) {
 
     header('Location: /homework9/login.php');
 
@@ -15,99 +17,102 @@ if ( null === $auth->getUsername() ) {
 
 //пользователь авторизован
 
-$v =  new \App\Models\View();
+$view =  new \App\Models\View();
 
-$v->assign('username', $auth->getUsername() );
+$view->assign('username', $auth->getUsername() );
+
 
 //Текст приветствия
 
-$tf = new \App\Models\File( __DIR__ . '/textFiles/welcomeText.txt');
+$file = new \App\Models\File( __DIR__ . '/textFiles/welcomeText.txt');
 
 if ( isset( $_POST['welcomeText'] ) ) {
     if ( is_string( $_POST['welcomeText'] ) ) {
 
-        $tf->setData( $_POST['welcomeText'] )->save();
+        $file->setData( $_POST['welcomeText'] )->save();
     }
 }
 
-$v->assign( 'welcomeText', $tf->getData() );
+$view->assign( 'welcomeText', $file->getData() );
+
 
 // Загрузка изображения
 
-$gal = new \App\Models\Gallery();
-$up = new \App\Models\Uploader( 'image', $gal->getImgTypes() );
+$gallery = new \App\Models\Gallery();
+$uploader = new \App\Models\Uploader( 'image', $gallery->getImgTypes() );
 
 $uploaded = null;
 
-if ( $up->isUploaded() ) {
+if ( $uploader->isUploaded() ) {
 
-    $uploaded = $up->upload( $gal->getPath() . '/' . $up->getFileName() );
+    $uploaded = $uploader->upload( $gallery->getPath() . '/' . $uploader->getFileName() );
 }
 
-$v->assign('uploaded', $uploaded );
+$view->assign('uploaded', $uploaded );
+
 
 //Редактирование расписания поездов
 
 if ( isset( $_POST['train'] ) ) {
 
-    $tr = $_POST['train'];
+    $train = $_POST['train'];
 
-    if ( is_array($tr) ) {
+    if ( is_array($train) ) {
 
-        if ( checkArrayValue($tr,'id') ) {
-            $trId = $tr['id'];
+        if ( checkArrayValue($train,'id') ) {
+            $trainId = $train['id'];
         }
-        if ( checkArrayValue($tr,'number') ) {
-            $trNumber = $tr['number'];
+        if ( checkArrayValue($train,'number') ) {
+            $trainNumber = $train['number'];
         }
-        if ( checkArrayValue($tr,'route') ) {
-            $trRoute = $tr['route'];
+        if ( checkArrayValue($train,'route') ) {
+            $trainRoute = $train['route'];
         }
-        if ( checkArrayValue($tr,'timeD') ) {
-            $trTimeD = $tr['timeD'];
+        if ( checkArrayValue($train,'timeD') ) {
+            $trainTimeD = $train['timeD'];
         }
-        if ( checkArrayValue($tr,'timeT') ) {
-            $trTimeT = $tr['timeD'];
+        if ( checkArrayValue($train,'timeT') ) {
+            $trainTimeT = $train['timeT'];
         }
-        if ( checkArrayValue($tr,'cmd') ) {
-            $trCmd = $tr['cmd'];
+        if ( checkArrayValue($train,'cmd') ) {
+            $trainCmd = $train['cmd'];
         }
 
     }
 }
 
-$tt = new \App\Models\TrainTable();
+$trainTable = new \App\Models\TrainTable();
 
-if ( isset( $trCmd ) ) {
+if ( isset( $trainCmd ) ) {
 
-    switch ( $trCmd ) {
+    switch ( $trainCmd ) {
 
         case 'add':
-            if ( isset( $trNumber, $trRoute, $trTimeD, $trTimeT ) ) {
+            if ( isset( $trainNumber, $trainRoute, $trainTimeD, $trainTimeT ) ) {
 
-                $tt->addTrain( new \App\Models\Train($trNumber, $trRoute, $trTimeD, $trTimeT) );
+                $trainTable->addTrain( new \App\Models\Train($trainNumber, $trainRoute, $trainTimeD, $trainTimeT) );
             }
             break;
 
         case 'edit':
-            if ( isset( $trId, $trNumber, $trRoute, $trTimeD, $trTimeT ) ) {
+            if ( isset( $trainId, $trainNumber, $trainRoute, $trainTimeD, $trainTimeT ) ) {
 
-                $tt->updateTrain($trId, new \App\Models\Train($trNumber, $trRoute, $trTimeD, $trTimeT) );
+                $trainTable->updateTrain($trainId, new \App\Models\Train($trainNumber, $trainRoute, $trainTimeD, $trainTimeT) );
             }
             break;
 
         case 'del':
-            if ( isset( $trId ) ) {
+            if ( isset( $trainId ) ) {
 
-                $tt->delTrain( $trId );
+                $trainTable->delTrain( $trainId );
             }
             break;
     }
 
 }
 
-$v->assign('trains', $tt->getTrains() );
+$view->assign('trains', $trainTable->getTrains() );
 
 //Вывод в поток
 
-$v->display( __DIR__ . '/templates/adminPanel.php' );
+$view->display( __DIR__ . '/templates/adminPanel.php' );

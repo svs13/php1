@@ -18,12 +18,12 @@ class Authorization
         $this->database = new DB();
         $this->session = new Session();
 
-        $us = $this->getUsernameFromSession();
+        $username = $this->getUsernameFromSession();
 
-        if ( null !== $us ) {
-            if ( $this->isFindUsername($us) ) {
+        if ( null !== $username ) {
+            if ( $this->isFindUsername($username) ) {
 
-                $this->username = $us;
+                $this->username = $username;
             }
         }
 
@@ -38,19 +38,19 @@ class Authorization
 
     public function login(string $login, string $password)
     {
-        $us = $this->findUser($login); //логин и хэш-пароль пользователя специально не храню в св-вах.
+        $user = $this->findUser($login); //логин и хэш-пароль пользователя специально не храню в св-вах.
 
-        if ( null !== $us ) {
-            if ( $us->getLogin() === $login ) { //проверяем тот ли логин получили при поиске пользователя
-                if ( password_verify( $password, $us->getHashPassword() ) ) { //проверка пароля
-                    if ( $this->session->setValue('username', $us->getUsername() ) ) { // метим пользователя, иначе не авторизуем
-                        $this->username = $us->getUsername(); //пользователь авторизован
+        if ( null !== $user ) {
+            if ( password_verify( $password, $user->getHashPassword() ) ) { //проверка пароля
+                if ( $this->session->setValue('username', $user->getUsername() ) ) { // метим пользователя, иначе не авторизуем
 
-                        return true;
-                    }
+                    $this->username = $user->getUsername(); //пользователь авторизован
+
+                    return true;
                 }
             }
         }
+
 
         return false;
     }
@@ -68,12 +68,12 @@ class Authorization
 
     protected function getUsernameFromSession()
     {
-        $us = $this->session->getValue('username');
+        $username = $this->session->getValue('username');
 
-        if ( null !== $us ) {
-            if ( is_string($us) ) {
+        if ( null !== $username ) {
+            if ( is_string($username) ) {
 
-                return $us;
+                return $username;
             }
         }
 
@@ -83,17 +83,11 @@ class Authorization
     protected function isFindUsername($username)
     {
         $sql = 'SELECT username FROM users WHERE username=:us';
-        $ar = $this->database->query( $sql, [ ':us' => $username ] );
+        $data = $this->database->query( $sql, [ ':us' => $username ] );
 
-        if ( is_array($ar) ) {
-            if ( isset( $ar[0] ) ) {
-                if ( isset( $ar[0]['username'] ) ) {
-                    if ( $ar[0]['username'] === $username ) {
+        if ( is_array($data) ) {
 
-                        return true;
-                    }
-                }
-            }
+            return isset( $data[0] );//row есть, значит username тоже есть. Ответу БД доверяем.
         }
 
         return false;
@@ -103,14 +97,14 @@ class Authorization
     protected function findUser($login)
     {
         $sql = 'SELECT * FROM users WHERE login=:login';
-        $ar = $this->database->query( $sql, [ ':login' => $login ] );
+        $data = $this->database->query( $sql, [ ':login' => $login ] );
 
-        if ( is_array($ar) ) {
-            if ( isset( $ar[0] ) ) {
-                if ( isset( $ar[0]['login'], $ar[0]['hashPassword'], $ar[0]['username'] ) ) {
+        if ( is_array($data) ) {
+            if ( isset( $data[0] ) ) {
 
-                    return new User( $ar[0]['login'], $ar[0]['hashPassword'], $ar[0]['username'] );
-                }
+                $row = $data[0];
+
+                return new User( $row['login'], $row['hashPassword'], $row['username'] );
             }
         }
 

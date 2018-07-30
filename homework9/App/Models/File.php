@@ -31,13 +31,6 @@ class File
         return $this;
     }
 
-    public function append(string $text)
-    {
-        $this->data .= $text;
-
-        return $this;
-    }
-
     public function save()
     {
         if ( isset($this->data) ) {

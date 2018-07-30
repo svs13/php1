@@ -14,7 +14,6 @@ class TrainTable
     public function __construct()
     {
         $this->dataBase = new DB();
-
     }
 
 
@@ -23,23 +22,20 @@ class TrainTable
         if ( null === $this->trains ) {
 
             $sql = 'SELECT * FROM trains ORDER BY id';
-            $d = $this->dataBase->query($sql,[]);
+            $data = $this->dataBase->query($sql);
 
             $this->trains = [];
 
-            if ( is_array($d) ) { //записи есть
+            if ( is_array($data) ) { //записи есть
 
-                foreach ($d as $ar) {
-                    if ( isset( $ar['id'], $ar['number'], $ar['route'], $ar['timeDeparture'], $ar['timeTravel'] ) ) {
+                foreach ($data as $row) {
 
-                        $this->trains[ $ar['id'] ] = new Train( $ar['number'], $ar['route'], $ar['timeDeparture'], $ar['timeTravel'] );
-                    }
+                    $this->trains[ $row['id'] ] = new Train( $row['number'], $row['route'], $row['timeDeparture'], $row['timeTravel'] );
                 }
             }
         }
 
         return $this->trains;
-
     }
 
 
@@ -47,16 +43,14 @@ class TrainTable
     {
 
         $sql = 'INSERT INTO trains (number, route, timeDeparture, timeTravel) VALUE (:n, :r, :tD, :tT)';
-        $ps = [ //params
+        $params = [
             ':n' => $train->getNumber(),
             ':r' => $train->getRoute(),
             ':tD' => $train->getTimeDeparture(),
             ':tT' => $train->getTimeTravel(),
         ];
 
-        $d = $this->dataBase->query($sql,$ps);
-
-        if ( false === $d ) {
+        if ( false === $this->dataBase->query($sql, $params) ) {
 
             return false;
         }
@@ -71,7 +65,7 @@ class TrainTable
     {
 
         $sql = 'UPDATE trains SET number=:n, route=:r, timeDeparture=:tD, timeTravel=:tT WHERE id=:id';
-        $ps = [ //params
+        $params = [
             ':id' => $id,
             ':n' => $train->getNumber(),
             ':r' => $train->getRoute(),
@@ -79,9 +73,8 @@ class TrainTable
             ':tT' => $train->getTimeTravel(),
         ];
 
-        $d = $this->dataBase->query($sql,$ps);
 
-        if ( false === $d ) {
+        if ( false === $this->dataBase->query($sql, $params) ) {
 
             return false;
         }
@@ -96,13 +89,11 @@ class TrainTable
     {
 
         $sql = 'DELETE FROM trains WHERE id=:id';
-        $ps = [ //params
+        $params = [
             ':id' => $id,
         ];
 
-        $d = $this->dataBase->query($sql,$ps);
-
-        if ( false === $d ) {
+        if ( false === $this->dataBase->query($sql, $params) ) {
 
             return false;
         }

@@ -14,14 +14,12 @@ class Session
 
     public function start()
     {
-        if ( !$this->isActive() ) {
-            if ( !session_start() ) { //true - в случае успеха, иначе false
+        if ( $this->isActive() ) {
 
-                return false;
-            }
+            return true;
         }
 
-        return true;
+        return session_start(); //true - в случае успеха, иначе false
     }
 
 

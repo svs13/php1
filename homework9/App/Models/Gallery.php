@@ -13,29 +13,23 @@ class Gallery
     {
 
         $this->path = realpath( __DIR__ . '/../../images' );
-
-        if ( false === $this->path ) {
-
-            die('FatalError. Class Gallery. Error in path');
-        }
-
         $files = scandir( $this->path );
 
         if ( !is_array( $files ) ) {
 
-            die('FatalError. Class Gallery. Error in path');
+            //Фатальная ошибка
         }
 
         $files = array_diff( $files, ['.', '..'] );
 
         $this->images = [];
 
-        foreach ($files as $file) {
+        foreach ($files as $filename) {
 
             //В галерее должны быть только изображения
-            if ( in_array( $this->getMimeType( $this->path . '/' . $file ),  $this->getImgTypes() ) ) {
+            if ( in_array( $this->getMimeType( $this->path . '/' . $filename ),  $this->getImgTypes() ) ) {
 
-                $this->images[] = new Image($file);
+                $this->images[] = new Image($filename);
             }
 
         }
@@ -56,7 +50,7 @@ class Gallery
 
     }
 
-    public function getImgTypes(): array
+    public function getImgTypes()
     {
         return $this->imgTypes;
     }
@@ -68,14 +62,11 @@ class Gallery
 
     protected function getMimeType( $path ) //MIME тип содержимого файла
     {
-        if ( file_exists($path) ) {
+        $res = mime_content_type($path);
 
-            $res = mime_content_type($path);
+        if ( false !== $res ) { // если без ошибок
 
-            if ( false !== $res ) { // если без ошибок
-
-                return $res;
-            }
+            return $res;
         }
 
     }

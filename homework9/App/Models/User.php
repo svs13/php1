@@ -16,7 +16,6 @@ class User
         $this->login = $login;
         $this->hashPassword = $hashPassword;
         $this->username = $username;
-
     }
 
 

@@ -2,10 +2,8 @@
 
 require __DIR__ . '/autoload.php';
 
-$gal = new \App\Models\Gallery( __DIR__ . '/images/');
+$gallery = new \App\Models\Gallery();
 
-$v = new \App\Models\View();
-
-$v->assign('images', $gal->getImages() );
-
-$v->display( __DIR__ . '/templates/gallery.php' );
+$view = new \App\Models\View();
+$view->assign('images', $gallery->getImages() );
+$view->display( __DIR__ . '/templates/gallery.php' );

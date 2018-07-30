@@ -39,15 +39,13 @@ if ( isset( $login, $pass) ) {
 
 //не авторизован. Выводим в поток форму ввода логин/пароль
 
-$v = new \App\Models\View();
-
 if ( !isset($login) ) {
 
     $login = '';
 }
 
-$v->assign('login', $login);
-
-$v->display( __DIR__ . '/templates/login.php' );
+$view = new \App\Models\View();
+$view->assign('login', $login);
+$view->display( __DIR__ . '/templates/login.php' );
 
 
