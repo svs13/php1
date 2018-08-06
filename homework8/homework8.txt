@@ -14,7 +14,7 @@
 
     CREATE TABLE news (id SERIAL, header VARCHAR(100), text TEXT, author VARCHAR(100));
 
-    INSERT INTO news (header, text, author) VALUE
+    INSERT INTO news (header, text, author) VALUES
     (
     'Заголовок новости 5',
     'Текст новости 5',

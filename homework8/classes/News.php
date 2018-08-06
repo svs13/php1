@@ -41,7 +41,7 @@ class News
 
     public function addArticle(Article $article)
     {
-        $sql = 'INSERT INTO news (header, text, author) VALUE (:h,:t,:a)';
+        $sql = 'INSERT INTO news (header, text, author) VALUES (:h,:t,:a)';
         $params = [
             ':h' => $article->getHeader(),
             ':t' => $article->getText(),
